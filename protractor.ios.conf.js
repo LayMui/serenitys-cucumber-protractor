@@ -1,20 +1,27 @@
-const
-    { ConsoleReporter } = require('@serenity-js/console-reporter'),
-    { ArtifactArchiver } = require('@serenity-js/core'),
-    { Photographer, TakePhotosOfInteractions } = require('@serenity-js/protractor'),
-    { SerenityBDDReporter } = require('@serenity-js/serenity-bdd'),
-    isCI = require('is-ci');
+const { join } =  require('path')
+
+const { ConsoleReporter } = require('@serenity-js/console-reporter'),
+  { ArtifactArchiver } = require('@serenity-js/core'),
+  {
+    Photographer,
+    TakePhotosOfInteractions,
+  } = require('@serenity-js/protractor'),
+  { SerenityBDDReporter } = require('@serenity-js/serenity-bdd'),
+  isCI = require('is-ci')
 
 exports.config = {
   seleniumAddress: 'http://localhost:4723/wd/hub',
 
   chromeDriver: require(`chromedriver/lib/chromedriver`).path,
 
+  seleniumServerJar:
+    '/usr/local/lib/node_modules/protractor/node_modules/webdriver-manager/selenium/selenium-server-standalone-3.141.59.jar',
+
   baseUrl: 'http://localhost:8000',
 
   SELENIUM_PROMISE_MANAGER: false,
 
-  directConnect: true,
+  directConnect: false,
 
   // https://github.com/angular/protractor/blob/master/docs/timeouts.md
   allScriptsTimeout: 110000,
@@ -57,6 +64,7 @@ exports.config = {
     platformName: 'iOS',
     platformVersion: '14.5',
     deviceName: 'iPhone 12',
+    app: join(process.cwd(), './apps/navapp.app'),
 
     // see https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities#loggingpreferences-json-object
     loggingPrefs: {
