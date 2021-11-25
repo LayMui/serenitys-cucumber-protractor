@@ -36,8 +36,8 @@ exports.config = {
 
     cucumberOpts: {
         require: [
-            'features/step_definitions/*.ts',
-            'features/support/.serenity.ts',
+            'src/step_definitions/*.ts',
+            'src/support/.serenity.ts',
         ],
         'require-module':   [
             'ts-node/register'
